@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speed Test</title>
+</head>
+<body>
+    <h1>Speed Test Results</h1>
+    
+    <p>ISP: <span id="isp"></span></p>
+    <p>IP Address: <span id="ip"></span></p>
+    <p>Download Speed: <span id="download_speed"></span> Mbps</p>
+    <p>Upload Speed: <span id="upload_speed"></span> Mbps</p>
+
+    <button onclick="recheckSpeed()">Recheck Speed</button>
+
+    <script>
+        function recheckSpeed() {
+            fetch('/get_speedtest_result')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('isp').textContent = data.isp;
+                    document.getElementById('ip').textContent = data.ip;
+                    document.getElementById('download_speed').textContent = data.download_speed;
+                    document.getElementById('upload_speed').textContent = data.upload_speed;
+                });
+        }
+    </script>
+</body>
+</html>
